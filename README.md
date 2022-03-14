@@ -10,7 +10,7 @@ Figure 1. The network-based transition point prediction method. (a) A subgraph o
 
 The data is provided by HKU and OpenUp. The data can not be made available to others according to the University's ethical approval.
 
-![figure](https://github.com/zhongzhixu/WAN/blob/main/fig/figure3-01.png)
+![figure](https://github.com/zhongzhixu/WAN/blob/main/fig/figure3.png)
 
 This figure examplifies the distance between blocks in WAN. Red module represents ideation about self-harm and suicide block (ISSB),Yellow module stands for prior ISSB block (PISSB), Blue module is a non-ISS block (NISSB). In this example, ISSB is closer to PISSB than to NISSB.
 
