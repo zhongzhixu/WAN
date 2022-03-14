@@ -5,3 +5,4 @@ ISSPM is a novel network-based prediction model harnessing the strength of compl
 
 The general architecture of ISSPM is showed in the following.
 
+![figure](https://github.com/zhongzhixu/WAN/blob/master/fig/figure 2-01.tif)
