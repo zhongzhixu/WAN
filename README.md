@@ -20,11 +20,24 @@ Python 3.6
 Spyder 3.1.1
 
 ## Files in the folder
-DATA: data_sample.csv,
-kg_final.txt
+DATA: 
 
-data_loader.py,
-model.py,
+two_fictitious_conversation_examples.xlsx: This file contains two examplary and fictitious chats. Trials can be carried out using the two examples.
+
+confirm_risky_blocks.csv: Blocks with high risk of Self-harm and Suicidal Ideation (SSI)
+
+output_distance.csv：The distribution of NSSI-SSI and PSSI-SSI distances.
+
+viz.csv: for visualization.
+
+CODE:
+
+1graph_distancing_preceding_vs_random.py
+
+2visualize.py
+
+@@functions.py: This contains functions needed in the main program.
+@@keywords.py: This is to extract SSI keywords.
 
 
 
