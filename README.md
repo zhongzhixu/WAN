@@ -8,7 +8,7 @@ The general idea of ISSPM is showed in the figure below:
 ![figure](https://github.com/zhongzhixu/WAN/blob/main/fig/figure2-01.jpg)
 Figure 1. The network-based transition point prediction method. (a) A subgraph of the word affinity network. Solid lines represent relationships of word co-occurrence, dash lines represent relationships of word similarity; (b) One-tail z-test; (c)-(d) S-scores for two modules that are topologically closer or topologically distant. (e) Footprints of a block. Words within a block tend to form connected subgraphs, or block module. 
 
-The data is provided by HKU and OpenUp. The data can not be made available to others according to the University's ethical approval.
+The data is provided by HKU and OpenUp. The full dataset can not be made publicly available according to the University's ethical approval. Instead, we uploaded two fictitious examples in this repository for readers to test the code. The full data can be accessed upon request and a signment relevant data usage protocal.
 
 ![figure](https://github.com/zhongzhixu/WAN/blob/main/fig/figure3.png)
 
