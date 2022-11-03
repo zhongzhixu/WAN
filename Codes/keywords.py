@@ -141,6 +141,5 @@ tt = f.read()
 f.close()
 wordss = jieba.analyse.extract_tags(tt, topK=3000, withWeight=False, allowPOS=())       
 np.save('D:/research/openai/openup2.0/word2vec/testset_words.npy', wordss)
-#x = np.load('testset_words.npy')
 
 
