@@ -31,7 +31,7 @@ print (set(list(pre_df2['is_helpseeker'])))
 pre_df2 = pre_df2[pre_df2['is_helpseeker']=='True'] #1275713 vs 1469764
 pre_df2['message'] = pre_df2['msg'].astype(str) 
 
-#tokenize(pre_df2) #毙掉是怕意外擦除
+tokenize(pre_df2) 
 '''
 #============#-----------tokenize end
 
@@ -41,9 +41,7 @@ df2.dropna(subset=['tokenize'], inplace=True)
 suicidal = ['想死','自殺','跳樓', '離開世界', '死咗', '遺書', 
             '跳落去', '安樂死', '尋死', '去死','介手','界手','界刀','不想活','割脈'
             '跳樓','快D死','快d死','自刎','天台','跌落','企跳','自殘','鎅']
-#=['唔係想自殺', '唔係想死', '唔想死','冇勇氣自殺','死極都死唔去']
-#"過咗身"
-#别人想死（不是他自己），
+
 temp = []
 for i in df2['tokenize']:
     line = i.strip().split(' ')
@@ -378,7 +376,7 @@ def plot_pr(auc_score, precision, recall, label=None, pr=True):
 from random import sample
 n_cases = 100
 y_true = [0]*n_cases+[1]*n_cases
-y_scores = sample(dist_fr[:800], n_cases)+sample(dist_mr[:800], n_cases)   #注意：  1 refers to low risk
+y_scores = sample(dist_fr[:800], n_cases)+sample(dist_mr[:800], n_cases)   #Note：  1 refers to low risk
 print(roc_auc_score(y_true, y_scores))
 #precision, recall, thresholds1 = precision_recall_curve(y_true, y_scores)
 #plot_pr(0.5,  precision,recall, "pos")
@@ -448,34 +446,7 @@ f.close()
 viz = pd.DataFrame()
 viz['Source'] = [node_id[i[0]] for i in G.edges()]
 viz['Target'] = [node_id[i[1]] for i in G.edges()]
-'''
-#找10个risky module: (1)内部连接较多； （2）彼此连接紧密 
-viz_risky_modules = []
-for i in risky_words_lst[:10]:
-    if max_module_size(i, G)>10:
-        for j in risky_words_lst[20:30]:
-            if s_score(i, j, nodes, pathlength) > 0.1:       #####this setting is important
-                if max_module_size(j, G)>10:
-                    viz_risky_modules.append(word_polish(i, nodes))
-                    viz_risky_modules.append(word_polish(j, nodes))
-
-#找10个moderate module: (1)内部连接较多； （2）彼此连接xishu 
-viz_moderate_modules = []
-for i in moderate_words_lst[:30]:
-    if max_module_size(i, G)>10:
-        for j in moderate_words_lst[30:40]:
-            if s_score(i, j, nodes, pathlength) > 0.3:      #####this setting is important
-                if max_module_size(j, G)>10:
-                    viz_moderate_modules.append(word_polish(i, nodes))
-                    viz_moderate_modules.append(word_polish(j, nodes))
-
-'''
-'''
-viz_risky_modules = []
-for i in risky_words_lst[:]:
-    if max_module_size(i, G)>10:
-        print (i)
-'''        
+     
 def characteristics(mA, mB):
     print ('max_modele_size_A:', max_module_size(mA, G))
     print ('max_modele_size_B:', max_module_size(mB, G))
@@ -500,27 +471,7 @@ for mk in moderate_words_lst[:10]:
                     viz1.append(ri)
                     viz2.append(rj)
                     viz3.append(mk)
-'''                    
-viz_risky_modules = []
-viz_moderate_modules = []       
-for i in moderate_words_lst:
-    if max_module_size(i, G)>5:        
-        viz_moderate_modules.append(word_polish(i, nodes))
-for i in risky_words_lst:    
-    if max_module_size(i, G)>5: 
-        viz_risky_modules.append(word_polish(i, nodes))
 
-for i in viz_moderate_modules:
-    for j in viz_risky_modules:
-        characteristics(i, j)
-
-
-temp = []
-for i in viz_moderate_modules:
-    for j in viz_risky_modules:
-        temp.append(s_score(i, j, nodes, pathlength))
-print (np.mean(np.array(temp)))
-''' 
 #%%
 #edge feature
 random.seed(40)
@@ -619,80 +570,7 @@ for concept in viz_moderate_modules[:]:
         else:
             weight[(node_id[e[0]], node_id[e[1]])] = 3
             weight[(node_id[e[1]], node_id[e[0]])] = 3
-        
-'''
-for concept in random.sample(viz_moderate_modules, 10):                 
-    H = G.subgraph(concept)
-    for e in H.edges():
-        weight[(node_id[e[0]], node_id[e[1]])] = 3
-        weight[(node_id[e[1]], node_id[e[0]])] = 3 
-'''        
-        
-        
-        
-        
-        
-'''         
-risky_nodes = set(risky_nodes)
-existing_nodes = []
-for concept in random.sample(viz_moderate_modules, len(viz_moderate_modules)):                 
-    H = G.subgraph(concept)
-    
-    
-    for e in H.edges():
-        if ((node_id[e[0]] not in risky_nodes) and (node_id[e[1]] not in risky_nodes) and (node_id[e[0]] not in existing_nodes) and (node_id[e[1]] not in existing_nodes)):
-          
-                existing_nodes.append(node_id[e[0]])
-                existing_nodes.append(node_id[e[1]])
-                weight[(node_id[e[0]], node_id[e[1]])] = 3
-                weight[(node_id[e[1]], node_id[e[0]])] = 3 
-                
-        else:
-            temp = random.uniform(0,1)
-            if temp>0.95:
-                
-                existing_nodes.append(node_id[e[0]])
-                existing_nodes.append(node_id[e[1]])
-                weight[(node_id[e[0]], node_id[e[1]])] = 3
-                weight[(node_id[e[1]], node_id[e[0]])] = 3 
-                
-'''           
-                
-'''        
-    for e in H.edges():
-        if ((node_id[e[0]] not in risky_nodes) and (node_id[e[1]] not in risky_nodes) ):
-          
-                existing_nodes.append(node_id[e[0]])
-                existing_nodes.append(node_id[e[1]])
-                weight[(node_id[e[0]], node_id[e[1]])] = 3
-                weight[(node_id[e[1]], node_id[e[0]])] = 3 
-                
-        else:
-            temp = random.uniform(0,1)
-            if temp>0.00:
-                for s in weight:
-                    if ((s[0] == node_id[e[0]]) or (s[0] == node_id[e[1]])):
-                        weight[s] = 1
-                    if ((s[1] == node_id[e[0]]) or (s[1] == node_id[e[1]])):
-                        weight[s] = 1
-                existing_nodes.append(node_id[e[0]])
-                existing_nodes.append(node_id[e[1]])
-                weight[(node_id[e[0]], node_id[e[1]])] = 3
-                weight[(node_id[e[1]], node_id[e[0]])] = 3         
-                
-'''          
-                
-                
-                
-                
-                
-''' 
-for concept in random.sample(viz_moderate_modules,1):                 
-    H = G.subgraph(concept)
-    for e in H.edges():
-        weight[(node_id[e[0]], node_id[e[1]])] = 5
-        weight[(node_id[e[1]], node_id[e[0]])] = 5
-'''        
+             
 #----column 3
 wt=[]
 for i, j in zip(viz['Source'], viz['Target']):
