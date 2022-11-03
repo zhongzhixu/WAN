@@ -14,9 +14,7 @@ from function import s_score, word_polish, z_score, mean_sp
 from function import save_pkl, load_pkl
 from function import z_test, max_module_size,tokenize
 
-'''
-可视化中risky block的选取：选含介手，企跳等的，不要选想死，自杀这种
-'''
+
 #%%
 ### read conversation
 import jieba
@@ -34,7 +32,7 @@ print (set(list(pre_df2['is_helpseeker'])))
 pre_df2 = pre_df2[pre_df2['is_helpseeker']=='True'] #1275713 vs 1469764
 pre_df2['message'] = pre_df2['msg'].astype(str) 
 
-#tokenize(df2)  #毙掉是怕意外擦除
+#tokenize(df2) 
 '''
 #============#-----------tokenize end
 
@@ -44,7 +42,7 @@ pre_df2.dropna(subset=['tokenize'], inplace=True)
 suicidal = ['想死','自殺','跳樓', '離開世界', '逃離', '死咗', '天台', '遺書', 
  '落去', '跳落去', '安樂死', '尋死', '去死', 
  '跌落','介手','界手','界刀','不想活','跳樓','快D死','快d死']
-# '生無可戀'
+
 temp = []
 for i in pre_df2['tokenize']:
     line = i.strip().split(' ')
@@ -196,8 +194,7 @@ moderate_words_lst = [word_polish(i, G.nodes()) if len(word_polish(i, G.nodes())
 before_words_lst   = [word_polish(i, G.nodes()) if len(word_polish(i, G.nodes()))>0 else '' for i in before_words_lst   ]
 
 #%%
-#============good examples 
-#注意是iloc，因为lst是list, 并不indicate valid_risky_index里的index， 但是indicate绝对位置
+
 goodId = []
 goodId.append (valid_risky_index.iloc[134,0])
 goodId.append (valid_risky_index.iloc[161,0])
@@ -377,7 +374,7 @@ for i in path:
             weight[(node_id[e2], node_id[e1])] = length[i]
 
 #%%
-#注意： 如果一条边同时属于两种module, 后面的code会改变前面code的赋值     
+
 #----column 3
 wt=[]
 for i, j in zip(viz['Source'], viz['Target']):
@@ -395,11 +392,6 @@ for i, j in zip(vizf['Source'], vizf['Target']):
 vizf['edg'] = edg    
 vizf['edg'] =vizf['edg'].astype(str)
 vizf = vizf.drop_duplicates(subset='edg')
+vizf.to_csv('viz.csv', index= False)
 
-#vizf.to_csv('viz.csv', index= False)
-
-
-a = 0.66
-b = 0.83
-print (2*a*b/(a+b))
 
