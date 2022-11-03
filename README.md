@@ -22,13 +22,13 @@ Spyder 3.1.1
 ## Files in the folder
 DATA: 
 
-two_fictitious_conversation_examples.xlsx: This file contains two examplary and fictitious chats. Trials can be carried out using the two examples.
+ROC-AUC curve.xlsx: This file contains the underlying source data for the ROC-AUC curve.
 
-confirm_risky_blocks.csv: Blocks with high risk of Self-harm and Suicidal Ideation (SSI)
+the distribution of distance.csv: The distribution of the PSSIB-SSIB and NSSIB-SSIB distance.
 
-output_distance.csv：The distribution of NSSI-SSI and PSSI-SSI distances.
+WAN network.csv：The World Affinity Network.
 
-viz.csv: for visualization.
+
 
 CODE:
 
